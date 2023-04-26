@@ -19,9 +19,15 @@ public class PlayerMovement : MonoBehaviour
     public void RemoveLife()
     {
         Lives--;
+        ScoreManager.UpdateUIText();
         if(Lives <= 0)
         {
             ScoreManager.GameOver();
         }
+    }
+
+    public int GetLives()
+    {
+        return Lives;
     }
 }

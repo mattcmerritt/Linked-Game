@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -12,12 +13,16 @@ public class ScoreManager : MonoBehaviour
     [SerializeField, Range(-10f, 10f)] private float TaskSpawnMinX, TaskSpawnMaxX, TaskSpawnMinY, TaskSpawnMaxY;
     [SerializeField, Range(0f, 10f)] private float TimeIntervalForSurvivalScore;
     [SerializeField, Range(0, 1000)] private int SurvivalScoreAmount;
+    [SerializeField] private PlayerMovement Player;
+    [SerializeField] private TMP_Text ScoreTracker, LivesTracker;
     private static int HighScore, PrevScore;
 
     protected void Start()
     {
         Score = 0;
         TimeSinceLastTask = 0;
+
+        UpdateUIText();
 
         StartCoroutine(AwardScoreOverTime());
     }
@@ -62,6 +67,7 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int pointsToAdd)
     {
         Score += pointsToAdd;
+        UpdateUIText();
     }
 
     public void GameOver()
@@ -85,5 +91,11 @@ public class ScoreManager : MonoBehaviour
     public static int GetHighScore()
     {
         return HighScore;
+    }
+
+    public void UpdateUIText()
+    {
+        ScoreTracker.text = "Score: " + Score;
+        LivesTracker.text = "Lives: " + Player.GetLives();
     }
 }
