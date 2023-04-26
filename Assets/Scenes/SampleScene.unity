@@ -2387,6 +2387,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rb: {fileID: 1170925838}
   ThrusterSpeed: 2.5
+  Lives: 5
+  ScoreManager: {fileID: 550817043}
 --- !u!58 &1170925840
 CircleCollider2D:
   m_ObjectHideFlags: 0

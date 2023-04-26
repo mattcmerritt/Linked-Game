@@ -6,11 +6,22 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D Rb;
     [SerializeField, Range(0f, 10f)] private float ThrusterSpeed;
+    [SerializeField, Range(0f, 10f)] private int Lives; 
+    [SerializeField] private ScoreManager ScoreManager;
 
     protected void FixedUpdate()
     {
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         Rb.AddForce(input * ThrusterSpeed);
+    }
+
+    public void RemoveLife()
+    {
+        Lives--;
+        if(Lives <= 0)
+        {
+            ScoreManager.GameOver();
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField, Range(-10f, 10f)] private float TaskSpawnMinX, TaskSpawnMaxX, TaskSpawnMinY, TaskSpawnMaxY;
     [SerializeField, Range(0f, 10f)] private float TimeIntervalForSurvivalScore;
     [SerializeField, Range(0, 1000)] private int SurvivalScoreAmount;
+    private static int HighScore, PrevScore;
 
     protected void Start()
     {
@@ -60,5 +62,28 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int pointsToAdd)
     {
         Score += pointsToAdd;
+    }
+
+    public void GameOver()
+    {
+        // score management
+        PrevScore = Score;
+        if(Score > HighScore)
+        {
+            HighScore = Score;
+        }
+
+        // screen management
+        SceneManager.LoadScene("MenuScene");
+    }
+
+    public static int GetPrevScore()
+    {
+        return PrevScore;
+    }
+
+    public static int GetHighScore()
+    {
+        return HighScore;
     }
 }
