@@ -11,8 +11,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        Debug.Log(input);
-
         Rb.AddForce(input * ThrusterSpeed);
     }
 }
